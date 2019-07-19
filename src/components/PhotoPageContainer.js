@@ -11,13 +11,18 @@ class PhotoPageContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.photos) return 'Loading...'
-    return <PhotoPage photos={this.props.photos} />
+    if (!this.props.photos || !this.props.albums) return 'Loading...'
+    const albumTitle = this.props.albums.find(album => album.id === parseInt(this.props.match.params.id)).title
+    return <PhotoPage 
+      photos={this.props.photos} 
+      albumTitle={albumTitle}/>
   }
 }
 
 const mapStateToProps = (state) => {
-  return {photos: state.photos}
+  console.log('State from PhPC', state)
+  return {photos: state.photos,
+          albums: state.albums}
 }
 
 export default connect(mapStateToProps, {getPhotosByAlbum})(PhotoPageContainer)

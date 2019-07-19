@@ -12,10 +12,10 @@ class AlbumsListContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.albums.albums) return 'Loading...'
+    if (!this.props.albums) return 'Loading...'
     return (
       <div>
-        <AlbumsList albums={this.props.albums.albums} />
+        <AlbumsList albums={this.props.albums} />
         <AddAlbumForm createAlbum={this.props.createAlbum} />
       </div>
     )
@@ -23,8 +23,10 @@ class AlbumsListContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('State from ALbListC', state)
   return {
-    albums: state
+    albums: state.albums,
+    photos: state.photos
   }
 }
 
